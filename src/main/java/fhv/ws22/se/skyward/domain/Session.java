@@ -34,7 +34,7 @@ public class Session extends UnicastRemoteObject implements SessionService {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends AbstractDto> List getAll(Class<T> clazz) {
+    public <T extends AbstractDto> List getAll(Class<T> clazz) throws RemoteException {
         List<? extends AbstractModel> modelList = dataService.getAll(dtoModelClassMap.get(clazz));
         List<T> dtoList = new ArrayList<T>();
         for (AbstractModel model : modelList) {
@@ -43,30 +43,30 @@ public class Session extends UnicastRemoteObject implements SessionService {
         return dtoList;
     }
 
-    public <T extends AbstractDto> T get(UUID id, Class<T> clazz) {
+    public <T extends AbstractDto> T get(UUID id, Class<T> clazz) throws RemoteException {
         return dataService.get(id, dtoModelClassMap.get(clazz)).toDto();
     }
 
-    public <T extends AbstractDto> void add(T t) {
+    public <T extends AbstractDto> void add(T t) throws RemoteException {
         AbstractModel model = t.toModel();
         dataService.add(model);
     }
 
-    private <T extends AbstractDto> UUID addAndReturnId(Class<T> clazz, T t) {
+    private <T extends AbstractDto> UUID addAndReturnId(Class<T> clazz, T t) throws RemoteException {
         AbstractModel model = t.toModel();
         return dataService.addAndReturnId(dtoModelClassMap.get(clazz), model);
     }
 
-    public <T extends AbstractDto> void update(UUID id, T t) {
+    public <T extends AbstractDto> void update(UUID id, T t) throws RemoteException {
         AbstractModel model = t.toModel();
         dataService.update(id, model);
     }
 
-    public <T extends AbstractDto> void delete(UUID id, Class<T> clazz) {
+    public <T extends AbstractDto> void delete(UUID id, Class<T> clazz) throws RemoteException {
         dataService.delete(id, dtoModelClassMap.get(clazz));
     }
 
-    public List<RoomDto> getAvailableRooms(LocalDateTime checkIn, LocalDateTime checkOut) {
+    public List<RoomDto> getAvailableRooms(LocalDateTime checkIn, LocalDateTime checkOut) throws RemoteException {
         if (checkIn == null || checkOut == null) {
             return null;
         }
@@ -95,7 +95,7 @@ public class Session extends UnicastRemoteObject implements SessionService {
         return availableRooms;
     }
 
-    public List<RoomDto> filterRooms(List<RoomDto> rooms, HashMap<String, Boolean> filterMap) {
+    public List<RoomDto> filterRooms(List<RoomDto> rooms, HashMap<String, Boolean> filterMap) throws RemoteException {
         List<RoomDto> availableRooms = new ArrayList<RoomDto>();
         for (RoomDto room : rooms) {
             if (room.getRoomTypeName().equals("Single") && filterMap.get("Single")) {
@@ -116,7 +116,7 @@ public class Session extends UnicastRemoteObject implements SessionService {
 
 
 
-    public BookingDto getTmpBooking() {
+    public BookingDto getTmpBooking() throws RemoteException {
         if (tmpBookingId == null) {
             BookingDto booking = new BookingDto();
             booking.setCheckInDateTime(LocalDateTime.now());
@@ -125,10 +125,10 @@ public class Session extends UnicastRemoteObject implements SessionService {
         }
         return get(tmpBookingId, BookingDto.class);
     }
-    public void resetTmpBooking() {
+    public void resetTmpBooking() throws RemoteException {
         tmpBookingId = null;
     }
-    public void setTmpBooking(BookingDto booking) {
+    public void setTmpBooking(BookingDto booking) throws RemoteException {
         BookingDto tmpBid = get(booking.getId(), BookingDto.class);
         if (tmpBid == null) {
             throw new IllegalArgumentException("Booking could not be added");
@@ -136,7 +136,7 @@ public class Session extends UnicastRemoteObject implements SessionService {
         tmpBookingId = tmpBid.getId();
     }
 
-    public InvoiceDto getTmpInvoice() {
+    public InvoiceDto getTmpInvoice() throws RemoteException {
         if (tmpInvoiceId == null) {
             BookingDto booking = getTmpBooking();
 
@@ -166,7 +166,7 @@ public class Session extends UnicastRemoteObject implements SessionService {
         return get(tmpInvoiceId, InvoiceDto.class);
     }
 
-    private BigDecimal getPrice(String roomTypeName) {
+    private BigDecimal getPrice(String roomTypeName) throws RemoteException {
         switch (roomTypeName) {
             case "Single":
                 return new BigDecimal(100);
@@ -183,10 +183,10 @@ public class Session extends UnicastRemoteObject implements SessionService {
         }
     }
 
-    public void resetTmpInvoice() {
+    public void resetTmpInvoice() throws RemoteException {
         tmpInvoiceId = null;
     }
-    public void setTmpInvoice(InvoiceDto invoice) {
+    public void setTmpInvoice(InvoiceDto invoice) throws RemoteException {
         InvoiceDto tmpIid = get(invoice.getId(), InvoiceDto.class);
         if (tmpIid == null) {
             throw new IllegalArgumentException("Invoice could not be added");
@@ -196,10 +196,10 @@ public class Session extends UnicastRemoteObject implements SessionService {
 
 
 
-    public void setRoomFilterMap(HashMap<String, Boolean> filterMap) {
+    public void setRoomFilterMap(HashMap<String, Boolean> filterMap) throws RemoteException {
         this.filterMap = filterMap;
     }
-    public HashMap<String, Boolean> getRoomFilterMap() {
+    public HashMap<String, Boolean> getRoomFilterMap() throws RemoteException {
         return filterMap;
     }
 }
