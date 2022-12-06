@@ -4,15 +4,16 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import fhv.ws22.se.skyward.domain.dtos.*;
 import fhv.ws22.se.skyward.domain.model.*;
-import fhv.ws22.se.skyward.view.SessionService;
 
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 
 @Singleton
-public class Session implements SessionService {
+public class Session extends UnicastRemoteObject implements SessionService {
     @Inject
     private DataService dataService;
     private UUID tmpBookingId;
@@ -21,7 +22,7 @@ public class Session implements SessionService {
     private Map<Class, Class> dtoModelClassMap;
 
 
-    public Session() {
+    public Session() throws RemoteException {
         filterMap = new HashMap<>();
         dtoModelClassMap = new HashMap<>();
         dtoModelClassMap.put(CustomerDto.class, CustomerModel.class);

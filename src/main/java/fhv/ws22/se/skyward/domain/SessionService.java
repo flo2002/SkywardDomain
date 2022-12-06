@@ -1,4 +1,4 @@
-package fhv.ws22.se.skyward.view;
+package fhv.ws22.se.skyward.domain;
 
 import fhv.ws22.se.skyward.domain.dtos.AbstractDto;
 import fhv.ws22.se.skyward.domain.dtos.BookingDto;

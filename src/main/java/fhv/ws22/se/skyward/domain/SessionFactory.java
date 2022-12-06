@@ -6,6 +6,7 @@ import fhv.ws22.se.skyward.AppConfig;
 import fhv.ws22.se.skyward.persistence.DataGenerator;
 
 import java.math.BigInteger;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 public class SessionFactory {
@@ -29,7 +30,7 @@ public class SessionFactory {
         return instance;
     }
 
-    public Session getSession(BigInteger id) {
+    public Session getSession(BigInteger id) throws RemoteException {
         if (sessions.get(id) == null) {
             Session session = new Session();
             injector.injectMembers(session);
