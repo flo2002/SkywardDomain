@@ -1,8 +1,5 @@
 package fhv.ws22.se.skyward.domain.dtos;
 
-import fhv.ws22.se.skyward.domain.model.AbstractModel;
-import org.modelmapper.ModelMapper;
-
 import java.io.Serializable;
 import java.util.UUID;
 

@@ -1,8 +1,5 @@
 package fhv.ws22.se.skyward.domain.dtos;
 
-import fhv.ws22.se.skyward.domain.model.ChargeableItemModel;
-import org.modelmapper.ModelMapper;
-
 import java.math.BigDecimal;
 
 public class ChargeableItemDto extends AbstractDto {

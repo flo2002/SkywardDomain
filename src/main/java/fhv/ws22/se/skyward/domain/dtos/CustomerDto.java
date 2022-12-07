@@ -1,9 +1,7 @@
 package fhv.ws22.se.skyward.domain.dtos;
 
-import fhv.ws22.se.skyward.domain.model.CustomerModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.modelmapper.ModelMapper;
 
 public class CustomerDto extends AbstractDto {
     private static final Logger logger = LogManager.getLogger("CustomerDto");

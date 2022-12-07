@@ -1,12 +1,5 @@
 package fhv.ws22.se.skyward.domain.dtos;
 
-import fhv.ws22.se.skyward.domain.model.AddressModel;
-import fhv.ws22.se.skyward.domain.model.BookingModel;
-import fhv.ws22.se.skyward.domain.model.InvoiceModel;
-import fhv.ws22.se.skyward.persistence.entity.Address;
-import fhv.ws22.se.skyward.persistence.entity.Booking;
-import org.modelmapper.ModelMapper;
-
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 
