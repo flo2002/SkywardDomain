@@ -70,17 +70,6 @@ public class BookingDto extends AbstractDto {
         this.rooms = rooms;
     }
 
-
-    public BookingModel toModel() {
-        logger.info("objects: " + this.toString() + ", msg: Transformation BookingDto to BookingModel.");
-        return modelMapper.map(this, BookingModel.class);
-    }
-    public static BookingDto toDto(BookingModel booking) {
-        logger.info("objects: " + booking.toString() + ", msg: Transformation BookingModel to BookingDto");
-        ModelMapper mm = new ModelMapper();
-        return mm.map(booking, BookingDto.class);
-    }
-
     @Override
     public String toString() {
         return "BookingDto{" +

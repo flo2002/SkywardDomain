@@ -42,16 +42,6 @@ public class RoomDto extends AbstractDto {
         this.roomStateName = roomStateName;
     }
 
-    public RoomModel toModel() {
-        logger.info("objects: " + this.toString() + ", msg: Transformation RoomDto to RoomModel");
-        return modelMapper.map(this, RoomModel.class);
-    }
-    public static RoomDto toDto(RoomModel room) {
-        logger.info("objects: " + room.toString() + ", msg: Transformation RoomModel to RoomDto");
-        ModelMapper mm = new ModelMapper();
-        return mm.map(room, RoomDto.class);
-    }
-
     @Override
     public String toString() {
         return "RoomDto{" +

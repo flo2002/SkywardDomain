@@ -88,15 +88,6 @@ public class InvoiceDto extends AbstractDto {
         this.billedCustomer = billedCustomer;
     }
 
-
-    public InvoiceModel toModel() {
-        return modelMapper.map(this, InvoiceModel.class);
-    }
-    public static InvoiceDto toDto(InvoiceModel invoice) {
-        ModelMapper mm = new ModelMapper();
-        return mm.map(invoice, InvoiceDto.class);
-    }
-
     @Override
     public String toString() {
         return "InvoiceDto{" +

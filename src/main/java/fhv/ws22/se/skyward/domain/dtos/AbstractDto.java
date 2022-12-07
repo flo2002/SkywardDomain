@@ -7,14 +7,11 @@ import java.io.Serializable;
 import java.util.UUID;
 
 public abstract class AbstractDto implements Serializable {
-    protected ModelMapper modelMapper;
     private UUID id;
 
     public AbstractDto() {
-        modelMapper = new ModelMapper();
     }
 
-    public abstract <T extends AbstractModel> T toModel();
     public UUID getId() {
         return id;
     }

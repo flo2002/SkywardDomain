@@ -47,14 +47,6 @@ public class ChargeableItemDto extends AbstractDto {
         this.booking = booking;
     }
 
-    public ChargeableItemModel toModel() {
-        return modelMapper.map(this, ChargeableItemModel.class);
-    }
-    public static ChargeableItemDto toDto(ChargeableItemModel item) {
-        ModelMapper mm = new ModelMapper();
-        return mm.map(item, ChargeableItemDto.class);
-    }
-
     public String toString() {
         return "ChargeableItemDto{" +
                 "name='" + name + '\'' +

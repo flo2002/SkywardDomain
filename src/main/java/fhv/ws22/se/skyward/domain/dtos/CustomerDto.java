@@ -40,16 +40,6 @@ public class CustomerDto extends AbstractDto {
         this.address = address;
     }
 
-    public CustomerModel toModel() {
-        logger.info("objects: " + this.toString() + ", msg: Transformation CustomerDto to CustomerModel.");
-        return modelMapper.map(this, CustomerModel.class);
-    }
-    public static CustomerDto toDto(CustomerModel customer) {
-        logger.info("objects: " + customer.toString() + ", msg: Transformation CustomerModel to CustomerDto");
-        ModelMapper mm = new ModelMapper();
-        return mm.map(customer, CustomerDto.class);
-    }
-
     @Override
     public String toString() {
         return "CustomerDto{" +

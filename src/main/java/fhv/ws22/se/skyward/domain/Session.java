@@ -16,6 +16,7 @@ import java.util.*;
 public class Session extends UnicastRemoteObject implements SessionService {
     @Inject
     private DataService dataService;
+    private DtoMapper dtoMapper;
     private UUID tmpBookingId;
     private UUID tmpInvoiceId;
     private HashMap<String, Boolean> filterMap;
@@ -23,6 +24,8 @@ public class Session extends UnicastRemoteObject implements SessionService {
 
 
     public Session() throws RemoteException {
+        dtoMapper = new DtoMapper();
+
         filterMap = new HashMap<>();
         dtoModelClassMap = new HashMap<>();
         dtoModelClassMap.put(CustomerDto.class, CustomerModel.class);
@@ -48,17 +51,17 @@ public class Session extends UnicastRemoteObject implements SessionService {
     }
 
     public <T extends AbstractDto> void add(T t) throws RemoteException {
-        AbstractModel model = t.toModel();
+        AbstractModel model = dtoMapper.toModel(t, dtoModelClassMap.get(t.getClass()));
         dataService.add(model);
     }
 
     private <T extends AbstractDto> UUID addAndReturnId(Class<T> clazz, T t) throws RemoteException {
-        AbstractModel model = t.toModel();
+        AbstractModel model = dtoMapper.toModel(t, dtoModelClassMap.get(t.getClass()));
         return dataService.addAndReturnId(dtoModelClassMap.get(clazz), model);
     }
 
     public <T extends AbstractDto> void update(UUID id, T t) throws RemoteException {
-        AbstractModel model = t.toModel();
+        AbstractModel model = dtoMapper.toModel(t, dtoModelClassMap.get(t.getClass()));
         dataService.update(id, model);
     }
 

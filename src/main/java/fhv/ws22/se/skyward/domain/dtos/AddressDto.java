@@ -55,15 +55,6 @@ public class AddressDto extends AbstractDto {
         this.country = country;
     }
 
-    public AddressModel toModel() {
-        return modelMapper.map(this, AddressModel.class);
-    }
-
-    public static AddressDto fromModel(AddressModel model) {
-        ModelMapper mm = new ModelMapper();
-        return mm.map(model, AddressDto.class);
-    }
-
     @Override
     public String toString() {
         return "AddressDto{" +
