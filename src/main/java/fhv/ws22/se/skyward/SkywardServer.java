@@ -2,7 +2,6 @@ package fhv.ws22.se.skyward;
 
 import fhv.ws22.se.skyward.domain.Session;
 import fhv.ws22.se.skyward.domain.SessionFactory;
-import fhv.ws22.se.skyward.domain.SessionService;
 
 import java.math.BigInteger;
 import java.rmi.Naming;
@@ -15,7 +14,7 @@ public class SkywardServer {
         try {
             LocateRegistry.createRegistry(1099);
         } catch (Exception e) {
-            System.out.println("Registry already running");
+            System.out.println("Registry runs already");
         }
 
         try {
