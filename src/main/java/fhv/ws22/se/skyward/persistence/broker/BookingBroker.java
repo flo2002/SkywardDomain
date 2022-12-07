@@ -1,14 +1,15 @@
 package fhv.ws22.se.skyward.persistence.broker;
 
-import com.google.inject.Inject;
-import fhv.ws22.se.skyward.domain.model.*;
+import fhv.ws22.se.skyward.domain.model.AbstractModel;
+import fhv.ws22.se.skyward.domain.model.BookingModel;
+import fhv.ws22.se.skyward.domain.model.CustomerModel;
+import fhv.ws22.se.skyward.domain.model.RoomModel;
 import fhv.ws22.se.skyward.persistence.DatabaseFacade;
-import fhv.ws22.se.skyward.persistence.entity.*;
+import fhv.ws22.se.skyward.persistence.entity.Booking;
+import fhv.ws22.se.skyward.persistence.entity.Customer;
+import fhv.ws22.se.skyward.persistence.entity.Room;
 import jakarta.persistence.EntityManager;
-import javafx.scene.chart.PieChart;
 
-import java.math.BigDecimal;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
