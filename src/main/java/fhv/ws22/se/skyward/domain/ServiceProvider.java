@@ -6,7 +6,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 
-@Singleton
 public class ServiceProvider extends UnicastRemoteObject implements ServiceProviderService {
     private HashMap<String, Object> services;
 

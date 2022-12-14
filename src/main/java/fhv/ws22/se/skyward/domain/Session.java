@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Singleton
-public class Session implements SessionService {
+public class Session extends UnicastRemoteObject implements SessionService {
     @Inject
     private DataService dataService;
     private DtoMapper dtoMapper;
@@ -23,7 +23,8 @@ public class Session implements SessionService {
     private Map<Class, Class> dtoModelClassMap;
 
 
-    public Session() {
+    public Session() throws RemoteException {
+        super();
         dtoMapper = new DtoMapper();
 
         filterMap = new HashMap<>();
