@@ -1,5 +1,6 @@
 package fhv.ws22.se.skyward;
 
+import fhv.ws22.se.skyward.domain.ServiceProvider;
 import fhv.ws22.se.skyward.domain.Session;
 import fhv.ws22.se.skyward.domain.SessionFactory;
 
@@ -18,8 +19,9 @@ public class SkywardServer {
         }
 
         try {
-            Session session = SessionFactory.getInstance().getSession(new BigInteger("1"));
-            Naming.rebind("rmi://localhost/SkywardDomainSession", session);
+            ServiceProvider serviceProvider = new ServiceProvider();
+            serviceProvider.registerService("session", SessionFactory.getInstance().getSession(new BigInteger("1")));
+            Naming.rebind("rmi://localhost/SkywardDomainService", serviceProvider);
 
             System.out.println("SkywardDomain is open for business");
         } catch (Exception e) {
