@@ -4,7 +4,11 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import fhv.ws22.se.skyward.domain.dtos.*;
 import fhv.ws22.se.skyward.domain.model.*;
+import fhv.ws22.se.skyward.domain.paymentParser.ParseException;
+import fhv.ws22.se.skyward.domain.paymentParser.Payment;
+import fhv.ws22.se.skyward.domain.paymentParser.PaymentParser;
 
+import java.io.StringReader;
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -204,5 +208,21 @@ public class Session extends UnicastRemoteObject implements SessionService {
     }
     public HashMap<String, Boolean> getRoomFilterMap() throws RemoteException {
         return filterMap;
+    }
+
+
+
+    public void handlePayment(String payment) {
+        System.out.println("Payment received: " + payment);
+        List<Payment> payments = null;
+        try {
+            payments = PaymentParser.parse(payment);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        for (Payment p : payments) {
+            System.out.println(p);
+        }
     }
 }

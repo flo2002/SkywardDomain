@@ -1,0 +1,157 @@
+options {
+    STATIC = false;
+}
+
+PARSER_BEGIN(PaymentParser)
+
+package fhv.ws22.se.skyward.domain.paymentParser;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.StringReader;
+
+public class PaymentParser {
+    public static List<Payment> parse(String payment) throws ParseException {
+        StringReader reader = new StringReader(payment);
+        PaymentParser parser = new PaymentParser(reader);
+        List<Payment> payments = parser.parse();
+        return payments;
+    }
+}
+
+PARSER_END(PaymentParser)
+
+SKIP : {
+    " "
+|   "\t"
+|   "\r"
+|   "\n"
+}
+
+TOKEN [IGNORE_CASE]: {
+    <EQ: "=">
+|   <RES: "Res#">
+|   <DATE: "Date">
+|   <AMOUNT: "Amount">
+|   <IBAN: "IBAN">
+|   <SEPERATOR: ";">
+}
+
+TOKEN : {
+    < MONTH : "JAN"|"FEB"|"MAR"|"APR"|"MAY"|"JUN"|"JUL"|"AUG"|"SEP"|"OCT"|"NOV"|"DEC" >
+}
+
+TOKEN : {
+    < NUMBER : (["0"-"9"]){1,6} >
+|   < FLOAT : (["0"-"9"]){1,5} "." (["0"-"9"]){1,2} >
+|   < DATE_TYPE : (["0"-"9"]){2} <MONTH> (["0"-"9"]){4} >
+|   < IBAN_TYPE : (["A"-"Z"]){2} (["0"-"9"]){20} >
+}
+
+
+List<Payment> parse() : {
+    List<Payment> payments = new ArrayList<Payment>();
+} {
+     payments = matchPayment(payments)
+
+    //sem
+    { return payments; }
+    //endsem
+}
+
+
+List<Payment> matchPayment(List<Payment> payments) : {
+    Payment payment = new Payment();
+} {
+    payment = matchNameValuePair(payment)
+    "#"
+    payment = matchNameValuePair(payment)
+    "#"
+    payment = matchNameValuePair(payment)
+    ["#" payment = matchNameValuePair(payment)]
+    <SEPERATOR>
+    [payments = matchPayment(payments)]
+
+    //sem
+    {
+        payments.add(payment);
+        return payments;
+    }
+    //endsem
+}
+
+
+Payment matchNameValuePair(Payment p) : {
+    Payment payment = p;
+    Token name;
+    Token value;
+} {
+    ((name=<RES> <EQ> value=<NUMBER>)
+    |(name=<DATE> <EQ> value=<DATE_TYPE>)
+    |(name=<AMOUNT> <EQ> value=<FLOAT>)
+    |(name=<IBAN> <EQ> value=<IBAN_TYPE>))
+
+    //sem
+    {
+        switch (name.image) {
+            case "Res#":
+                payment.setRes(Integer.parseInt(value.image));
+                break;
+            case "Date":
+                int year = Integer.parseInt(value.image.substring(5));
+                int month = 0;
+                int day = Integer.parseInt(value.image.substring(0, 2));
+
+                switch (value.image.substring(2, 5)) {
+                    case "JAN":
+                        month = 1;
+                        break;
+                    case "FEB":
+                        month = 2;
+                        break;
+                    case "MAR":
+                        month = 3;
+                        break;
+                    case "APR":
+                        month = 4;
+                        break;
+                    case "MAY":
+                        month = 5;
+                        break;
+                    case "JUN":
+                        month = 6;
+                        break;
+                    case "JUL":
+                        month = 7;
+                        break;
+                    case "AUG":
+                        month = 8;
+                        break;
+                    case "SEP":
+                        month = 9;
+                        break;
+                    case "OCT":
+                        month = 10;
+                        break;
+                    case "NOV":
+                        month = 11;
+                        break;
+                    case "DEC":
+                        month = 12;
+                        break;
+                }
+
+                payment.setDate(LocalDate.of(year, month, day));
+                break;
+            case "Amount":
+                payment.setAmount(Float.parseFloat(value.image));
+                break;
+            case "IBAN":
+                payment.setIban(value.image);
+                break;
+        }
+        return payment;
+    }
+    //endsem
+}

@@ -30,4 +30,6 @@ public interface SessionService extends Remote {
     InvoiceDto getTmpInvoice() throws RemoteException;
     void resetTmpInvoice() throws RemoteException;
     void setTmpInvoice(InvoiceDto invoice) throws RemoteException;
+
+    void handlePayment(String payment) throws RemoteException;
 }
