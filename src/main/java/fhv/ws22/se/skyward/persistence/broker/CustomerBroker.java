@@ -46,6 +46,7 @@ public class CustomerBroker extends BrokerBase<CustomerModel> {
         if (entityManager.createQuery("FROM Customer WHERE firstName = :firstName AND lastName = :lastName")
                 .setParameter("firstName", customerEntity.getFirstName())
                 .setParameter("lastName", customerEntity.getLastName())
+                .setParameter("type", customerEntity.getType())
                 .getResultList().isEmpty()) {
             entityManager.getTransaction().begin();
             entityManager.persist(customerEntity);
