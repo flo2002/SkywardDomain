@@ -8,7 +8,7 @@ import java.util.List;
 public class Customer extends AbstractEntity {
     private String firstName;
     private String lastName;
-    private String type;
+    private String customerType;
 
     @ManyToOne
     @JoinColumn(name = "address_id")
@@ -37,12 +37,12 @@ public class Customer extends AbstractEntity {
         this.billingAddress = billingAddress;
     }
 
-    public String getType() {
-        return type;
+    public String getCustomerType() {
+        return customerType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setCustomerType(String customerType) {
+        this.customerType = customerType;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Customer extends AbstractEntity {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", billingAddress=" + billingAddress +
-                ", type=" + type +
+                ", type=" + customerType +
                 '}';
     }
 }
