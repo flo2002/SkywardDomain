@@ -8,7 +8,7 @@ public class CustomerDto extends AbstractDto {
     private String firstName;
     private String lastName;
     private AddressDto address;
-    private String type; // possible types: private, travelAgency, group
+    private String type; 
 
     public CustomerDto() {
     }
