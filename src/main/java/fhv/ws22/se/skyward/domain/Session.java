@@ -145,7 +145,7 @@ public class Session extends UnicastRemoteObject implements SessionService {
             BookingDto booking = getTmpBooking();
 
             List<InvoiceDto> invoices = getAll(InvoiceDto.class);
-            invoices.removeIf(invoice -> invoice.getBooking().getId().equals(booking.getId()));
+            invoices.removeIf(invoice -> !invoice.getBooking().getId().equals(booking.getId()));
 
             if (invoices.isEmpty()) {
                 AddressDto customerAddress = new AddressDto("MainStreet", 43, 1234, "Vienna", "Austria");
