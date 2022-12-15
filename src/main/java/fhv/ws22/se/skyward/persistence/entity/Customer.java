@@ -40,7 +40,6 @@ public class Customer extends AbstractEntity {
     public String getCustomerType() {
         return customerType;
     }
-
     public void setCustomerType(String customerType) {
         this.customerType = customerType;
     }

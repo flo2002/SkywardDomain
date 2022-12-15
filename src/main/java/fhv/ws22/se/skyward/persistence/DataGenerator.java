@@ -23,8 +23,8 @@ public class DataGenerator {
 
             AddressModel customerAddress = new AddressModel("MainStreet", 43, 1234, "Vienna", "Austria");
 
-            CustomerModel john = new CustomerModel("John", "Doe", customerAddress);
-            CustomerModel jane = new CustomerModel("Jane", "Doe", customerAddress);
+            CustomerModel john = new CustomerModel("John", "Doe", customerAddress, "Individual");
+            CustomerModel jane = new CustomerModel("Jane", "Doe", customerAddress, "Travel Agency");
 
             BookingModel b = new BookingModel(LocalDateTime.now(), LocalDateTime.now().plusDays(1), true, List.of(jane), List.of(r2));
             BookingModel b2 = new BookingModel(LocalDateTime.now().plusWeeks(2), LocalDateTime.now().plusWeeks(3), false, List.of(john), List.of(r1));
