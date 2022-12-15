@@ -1,4 +1,4 @@
-package fhv.ws22.se.skyward.domain;
+package fhv.ws22.se.skyward.domain.service;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

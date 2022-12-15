@@ -1,13 +1,15 @@
-package fhv.ws22.se.skyward.domain;
+package fhv.ws22.se.skyward.domain.service;
 
 import com.google.inject.Singleton;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
+import java.util.Map;
 
+@Singleton
 public class ServiceProvider extends UnicastRemoteObject implements ServiceProviderService {
-    private HashMap<String, Object> services;
+    private Map<String, Object> services;
 
     public ServiceProvider() throws RemoteException {
         services = new HashMap<>();
