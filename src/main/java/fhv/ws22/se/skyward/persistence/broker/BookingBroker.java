@@ -41,9 +41,10 @@ public class BookingBroker extends BrokerBase<BookingModel> {
         List<Customer> customers = new ArrayList<Customer>();
         if (booking.getCustomers() != null) {
             booking.getCustomers().forEach(customer -> customers.add(
-                entityManager.createQuery("FROM Customer c WHERE c.firstName = :firstName AND c.lastName = :lastName", Customer.class)
+                entityManager.createQuery("FROM Customer c WHERE c.firstName = :firstName AND c.lastName = :lastName AND c.customerType = :customerType", Customer.class)
                     .setParameter("firstName", customer.getFirstName())
                     .setParameter("lastName", customer.getLastName())
+                    .setParameter("customerType", customer.getCustomerType())
                     .getSingleResult()
             ));
         }

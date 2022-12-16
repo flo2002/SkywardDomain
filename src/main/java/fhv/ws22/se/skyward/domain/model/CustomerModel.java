@@ -15,13 +15,16 @@ public class CustomerModel extends AbstractModel {
     private String lastName;
     private AddressModel address;
 
+    private String customerType;
+
     public CustomerModel() {
     }
 
-    public CustomerModel(String firstName, String lastName, AddressModel address) throws NameNotValidException {
+    public CustomerModel(String firstName, String lastName, AddressModel address, String customerType) throws NameNotValidException {
         setFirstName(firstName);
         setLastName(lastName);
         setAddress(address);
+        setCustomerType(customerType);
     }
 
     public String getFirstName() {
@@ -57,6 +60,13 @@ public class CustomerModel extends AbstractModel {
     }
     public void setAddress(AddressModel address) {
         this.address = address;
+    }
+
+    public String getCustomerType() {
+        return customerType;
+    }
+    public void setCustomerType(String customerType) {
+        this.customerType = customerType;
     }
 
     public CustomerDto toDto() {
