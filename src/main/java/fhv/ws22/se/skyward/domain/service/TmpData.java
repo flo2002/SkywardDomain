@@ -1,8 +1,8 @@
 package fhv.ws22.se.skyward.domain.service;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import fhv.ws22.se.skyward.domain.dtos.*;
+import fhv.ws22.se.skyward.domain.paymentParser.Payment;
+import fhv.ws22.se.skyward.domain.paymentParser.PaymentParser;
 
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
@@ -128,5 +128,19 @@ public class TmpData extends UnicastRemoteObject implements TmpDataService {
     }
     public HashMap<String, Boolean> getRoomFilterMap() {
         return filterMap;
+    }
+
+    public void handlePayment(String payment) {
+        System.out.println("Payment received: " + payment);
+        List<Payment> payments = null;
+        try {
+            payments = PaymentParser.parse(payment);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        for (Payment p : payments) {
+            System.out.println(p);
+        }
     }
 }

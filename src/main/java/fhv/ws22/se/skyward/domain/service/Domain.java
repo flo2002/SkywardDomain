@@ -1,11 +1,12 @@
 package fhv.ws22.se.skyward.domain.service;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import fhv.ws22.se.skyward.domain.DataService;
 import fhv.ws22.se.skyward.domain.DtoMapper;
 import fhv.ws22.se.skyward.domain.dtos.*;
 import fhv.ws22.se.skyward.domain.model.*;
+import fhv.ws22.se.skyward.domain.paymentParser.Payment;
+import fhv.ws22.se.skyward.domain.paymentParser.PaymentParser;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
