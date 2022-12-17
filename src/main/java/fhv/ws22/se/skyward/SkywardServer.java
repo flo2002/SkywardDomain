@@ -1,10 +1,12 @@
 package fhv.ws22.se.skyward;
 
+import fhv.ws22.se.skyward.domain.dtos.BookingDto;
 import fhv.ws22.se.skyward.domain.service.*;
 
 import java.math.BigInteger;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
+import java.util.List;
 
 public class SkywardServer {
     public static void main(String[] args) {
@@ -24,5 +26,6 @@ public class SkywardServer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }

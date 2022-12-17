@@ -14,14 +14,14 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Domain extends UnicastRemoteObject implements DomainService {
-    @Inject
-    private DataService dataService;
+    private final DataService dataService;
     private final DtoMapper dtoMapper;
     private final Map<Class, Class> dtoModelClassMap;
 
-    public Domain() throws RemoteException {
+    public Domain(DataService ds) throws RemoteException {
         super();
         dtoMapper = new DtoMapper();
+        dataService = ds;
 
         dtoModelClassMap = new HashMap<>();
         dtoModelClassMap.put(CustomerDto.class, CustomerModel.class);
