@@ -13,8 +13,6 @@ public class Session extends UnicastRemoteObject implements SessionService {
     public Session() throws RemoteException {
         super();
         serviceProvider = new ServiceProvider();
-        serviceProvider.registerService("DomainService", new Domain());
-        serviceProvider.registerService("TmpDataService", new TmpData(this));
     }
 
     public ServiceProviderService getServiceProvider() {

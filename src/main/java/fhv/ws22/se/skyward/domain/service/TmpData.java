@@ -20,10 +20,9 @@ public class TmpData extends UnicastRemoteObject implements TmpDataService {
     private UUID tmpInvoiceId;
     private HashMap<String, Boolean> filterMap;
 
-    public TmpData(SessionService session) throws RemoteException {
+    public TmpData(ServiceProviderService sp) throws RemoteException {
         super();
-        ServiceProviderService serviceProvider = session.getServiceProvider();
-        domainService = (DomainService) serviceProvider.getService("DomainService");
+        domainService = (DomainService) sp.getService("DomainService");
         filterMap = new HashMap<>();
     }
 
