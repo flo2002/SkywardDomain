@@ -18,4 +18,6 @@ public interface DomainService extends Remote {
     <T extends AbstractDto> void update(UUID id, T t) throws RemoteException;
     <T extends AbstractDto> void delete(UUID id, Class<T> clazz) throws RemoteException;
     List<RoomDto> getAvailableRooms(LocalDateTime checkIn, LocalDateTime checkOut) throws RemoteException;
+
+    void handlePayment(String payment) throws RemoteException;
 }

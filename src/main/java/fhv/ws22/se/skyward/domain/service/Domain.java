@@ -94,4 +94,18 @@ public class Domain extends UnicastRemoteObject implements DomainService {
 
         return availableRooms;
     }
+
+    public void handlePayment(String payment) {
+        System.out.println("Payment received: " + payment);
+        List<Payment> payments = null;
+        try {
+            payments = PaymentParser.parse(payment);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        for (Payment p : payments) {
+            System.out.println(p);
+        }
+    }
 }
