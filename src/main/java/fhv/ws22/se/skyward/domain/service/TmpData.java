@@ -22,7 +22,7 @@ public class TmpData extends UnicastRemoteObject implements TmpDataService {
 
     public TmpData(ServiceProviderService sp) throws RemoteException {
         super();
-        domainService = (DomainService) sp.getService("DomainService");
+        domainService = (DomainService) sp.getService(DomainService.class);
         filterMap = new HashMap<>();
     }
 

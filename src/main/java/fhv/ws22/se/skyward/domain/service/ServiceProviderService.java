@@ -4,5 +4,5 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface ServiceProviderService extends Remote {
-    Object getService(String serviceName) throws RemoteException;
+    Object getService(Class<? extends Remote> clazz) throws RemoteException;
 }

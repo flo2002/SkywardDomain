@@ -1,12 +1,13 @@
 package fhv.ws22.se.skyward.domain.service;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ServiceProvider extends UnicastRemoteObject implements ServiceProviderService {
-    private Map<Class, Object> services;
+    private Map<Class<? extends Remote>, Object> services;
 
     public ServiceProvider() throws RemoteException {
         services = new HashMap<>();
@@ -14,7 +15,7 @@ public class ServiceProvider extends UnicastRemoteObject implements ServiceProvi
         services.put(TmpDataService.class, new TmpData(this));
     }
 
-    public Object getService(String serviceName) throws RemoteException {
-        return services.get(serviceName);
+    public Object getService(Class<? extends Remote> clazz) throws RemoteException {
+        return services.get(clazz);
     }
 }
