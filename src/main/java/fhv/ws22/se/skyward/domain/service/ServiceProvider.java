@@ -15,6 +15,7 @@ public class ServiceProvider extends UnicastRemoteObject implements ServiceProvi
         services = new HashMap<>();
         services.put(DomainService.class, new Domain(ds));
         services.put(TmpDataService.class, new TmpData(this));
+        services.put(EmailService.class, new Email());
     }
 
     public Object getService(Class<? extends Remote> clazz) throws RemoteException {
