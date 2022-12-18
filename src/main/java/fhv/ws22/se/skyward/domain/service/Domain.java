@@ -8,6 +8,8 @@ import fhv.ws22.se.skyward.domain.model.*;
 import fhv.ws22.se.skyward.domain.paymentParser.Payment;
 import fhv.ws22.se.skyward.domain.paymentParser.PaymentParser;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDateTime;
@@ -104,8 +106,15 @@ public class Domain extends UnicastRemoteObject implements DomainService {
             e.printStackTrace();
         }
 
+        List<BookingModel> bookings = (List<BookingModel>) dataService.getAll(BookingModel.class);
         for (Payment p : payments) {
-            System.out.println(p);
+            for (BookingModel b : bookings) {
+                if (b.getBookingNumber().equals(BigInteger.valueOf(p.getRes()))) {
+                    BigDecimal price = BigDecimal.valueOf(p.getAmount()).negate();
+                    ChargeableItemModel chargeableItem = new ChargeableItemModel("Online Payment", price, 1, b);
+                    dataService.add(chargeableItem);
+                }
+            }
         }
     }
 }
