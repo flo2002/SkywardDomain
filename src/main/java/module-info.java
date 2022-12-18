@@ -22,4 +22,6 @@ module fhv.ws22.se.skyward {
     exports fhv.ws22.se.skyward.domain;
     opens fhv.ws22.se.skyward.domain to com.google.guice;
     exports fhv.ws22.se.skyward.domain.model;
+    exports fhv.ws22.se.skyward.domain.service;
+    opens fhv.ws22.se.skyward.domain.service to com.google.guice;
 }

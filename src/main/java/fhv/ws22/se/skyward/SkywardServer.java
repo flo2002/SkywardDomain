@@ -1,11 +1,12 @@
 package fhv.ws22.se.skyward;
 
-import fhv.ws22.se.skyward.domain.Session;
-import fhv.ws22.se.skyward.domain.SessionFactory;
+import fhv.ws22.se.skyward.domain.dtos.BookingDto;
+import fhv.ws22.se.skyward.domain.service.*;
 
 import java.math.BigInteger;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
+import java.util.List;
 
 public class SkywardServer {
     public static void main(String[] args) {
@@ -18,12 +19,13 @@ public class SkywardServer {
         }
 
         try {
-            Session session = SessionFactory.getInstance().getSession(new BigInteger("1"));
-            Naming.rebind("rmi://localhost/SkywardDomainSession", session);
+            SessionService session = SessionFactory.getInstance().getSession(new BigInteger("1"));
+            Naming.rebind("rmi://localhost/SkywardDomainService", session);
 
             System.out.println("SkywardDomain is open for business");
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }
