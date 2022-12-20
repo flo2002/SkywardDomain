@@ -4,6 +4,7 @@ import fhv.ws22.se.skyward.domain.dtos.BookingDto;
 import fhv.ws22.se.skyward.domain.dtos.InvoiceDto;
 import fhv.ws22.se.skyward.domain.dtos.RoomDto;
 
+import java.math.BigDecimal;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -21,4 +22,6 @@ public interface TmpDataService extends Remote {
     InvoiceDto getTmpInvoice() throws RemoteException;
     void resetTmpInvoice() throws RemoteException;
     void setTmpInvoice(InvoiceDto invoice) throws RemoteException;
+
+    BigDecimal getPrice(String roomTypeName) throws RemoteException;
 }
