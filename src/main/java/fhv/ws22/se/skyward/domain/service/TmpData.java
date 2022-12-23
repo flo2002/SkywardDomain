@@ -1,9 +1,6 @@
 package fhv.ws22.se.skyward.domain.service;
 
-import fhv.ws22.se.skyward.domain.DataService;
 import fhv.ws22.se.skyward.domain.dtos.*;
-import fhv.ws22.se.skyward.domain.paymentParser.Payment;
-import fhv.ws22.se.skyward.domain.paymentParser.PaymentParser;
 
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
@@ -95,7 +92,7 @@ public class TmpData extends UnicastRemoteObject implements TmpDataService {
         return domainService.get(tmpInvoiceId, InvoiceDto.class);
     }
 
-    private BigDecimal getPrice(String roomTypeName) {
+    public BigDecimal getPrice(String roomTypeName) {
         switch (roomTypeName) {
             case "Single":
                 return new BigDecimal(100);
